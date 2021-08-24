@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Hello</title>
+
+  </head>
+  <body>
+
+
+    <div class>
+      <label for="namasiswa">Nama Siswa</label>
+      <input type="text" class="form-control" id="txt_namasiswa"  placeholder="Masukkan Nama">
+      
+    </div>
+    <label for="kelas">Kelas</label>
+    <select class="form-control" id="txt_kelas">
+      <option value="X">X</option>
+      <option value="XI">XI</option>
+      <option value="XII">XII</option>
+    </select>
+
+    <label for="alamat">Alamat</label>
+    <textarea class="form-control" id="txt_alamat" rows="3"></textarea>
+
+    <button class="btn btn-primary mt-4" onclick="add()">Simpan</button>
+
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Nama</th>
+          <th scope="col">Kelas</th>
+          <th scope="col">Alamat</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody id="tampildata">
+
+        
+      </tbody>
+    </table>
+    </div>
+
+
+
+    <script>
+     var namasiswa = ["Dedi"]
+     var kelas = ["X"]
+     var alamat = ["Jakarta"]
+
+     var tampil = document.getElementById("tampildata")
+
+     function showData() {
+       tampil.innerHTML = ""
+
+      for(i = 0; i<namasiswa.length; i++){
+          var nodata = i+1
+
+          tampil.innerHTML +="<tr>"+
+          "<th>"+nodata+"</th>"+
+          "<td>"+namasiswa[i]+"</td>"+
+          "<td>"+kelas[i]+"</td>"+
+          "<td>"+alamat[i]+"</td>"+
+          "<td>"+
+            "<button class='btn btn-warning'>Edit</button>"+
+            "<button class='btn btn-danger'>Hapus</button>"+
+          "</td>"+
+        "</tr>"
+      }
+
+     }
+
+     showData()
+
+    function add() {
+      var namabaru = document.getElementById("txt_namasiswa").value
+      var kelasbaru = document.getElementById("txt_kelas").value
+      var alamatbaru = document.getElementById("txt_alamat").value
+
+      namasiswa.push(namabaru)
+      kelas.push(kelasbaru)
+      alamat.push(alamatbaru)
+
+      showData()
+
+      
+    }
+    
+
+
+    </script>
+    
+     
+     
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
