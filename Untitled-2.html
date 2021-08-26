@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Hello!</title>
+    <style>
+      .jumbotron{
+        height: 300px;
+        background-image: url(https://images.pexels.com/photos/4530791/pexels-photo-4530791.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500);
+        background-size: cover;
+        background-position-y: -100px;
+      }
+
+      .judullist{
+        height: 50px; ;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Fluid jumbotron</h1>
+        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+      </div>
+    </div>
+
+
+     <div class="container">
+       <div class="row">
+        <div class="col-4">
+          <div class="judullist bg-dark rounded text-center text-white pt-2">List Item</div>
+
+          <div class="listkeranjang" id="listkeranjang">
+           
+          </div>
+         
+          <table class="table table-light" width="100%">
+            <tbody>
+              <tr>
+                <td>Discount (5%)</td>
+                <td>Rp.<span id="discount"></span></td>
+              </tr>
+              <tr>
+                <td>PPN (10%)</td>
+                <td>Rp. <span id="pajak"></span></td>
+              </tr>
+              <tr class="bg-dark text-white">
+                <td>Total (10%)</td>
+                <td>Rp. <span id="totalbayar"></span></td>
+              </tr>
+            </tbody>
+          </table>
+
+<button type="button" class="btn btn-primary mt-3 btn-block">Bayar</button>
+
+         </div>
+  
+         <div class="col-8" id="listproduk">
+         
+         </div>
+
+          <script> 
+        var namabarang = ['Baju Koko','Baju Gamis']
+        var hargabarang = [200000,300000]
+        var gambarbarang = [
+          "https://id-live-05.slatic.net/shop/8255a0d9c15e08640d74d8955fd6274e.jpeg_2200x2200q80.jpg_.webp",
+          "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//94/MTA-11209709/no_brand_baju_gamis_syari_jumbo_shiya_dress_murah_-_fashion_muslim_dress_gamis_wanita_terbaru_gamis_busui_terlaris_full03_pulupojf.jpg"
+        ]
+        
+          var listproduk = document.getElementById('listproduk')
+          var listkeranjang = document.getElementById('listkeranjang')
+    
+         var namabarang_keranjang = []
+         var hargabarang_keranjang = []
+
+          function showlistproduk() {
+            listproduk.innerHTML =''
+
+           for (let i = 0; i < namabarang.length; i++) {
+             const element = namabarang[i];
+             
+             listproduk.innerHTML +='<div class="card float-left mr-3 mb-3" style="width: 12rem;">'+
+             '<img class="card-img-top" src="'+gambarbarang[i]+'"class="card-img-top" alt="Card image cap">'+
+              '<div class="card-body">'+
+                '<h5 class="card-title">'+namabarang[i]+'</h5>'+
+                '<p class="card-text">'+hargabarang[i]+'</p>'+
+                '<a href="#" class="btn btn-primary" onclick="addlistitem('+i+')">Beli</a>'+
+              '</div>'+
+            '</div>'
+         
+           }
+          }
+           
+          function addlistitem(id) {
+            namabarang_keranjang.push(namabarang[id])
+            hargabarang_keranjang.push(hargabarang[id])
+
+            showlistkeranjang()
+
+          
+          }
+          var tampilandiscount = document.getElementById('discount')
+          var tampilanpajak = document.getElementById('pajak')
+          var tampilantotalbayar = document.getElementById('totalbayar')
+
+          function showlistkeranjang() {
+            listkeranjang.innerHTML=''
+
+            var discount = 0
+            var pajak = 0
+            var hargatotal = 0
+            var totalbayar = 0
+            for (let i = 0; i < namabarang_keranjang.length; i++) {
+              const element = namabarang_keranjang[i];
+              listkeranjang.innerHTML +=' <div class="card mt-3 mb-3" style="width: 18rem;">'+
+              '<div class="card-body">'+
+                '<h5 class="card-title">'+namabarang_keranjang[i]+'</h5>'+
+                '<p class="card-text">'+hargabarang_keranjang[i]+'</p>'+
+                '<p>Qty : 1</p>'+
+                '<a href="#" class="btn btn-danger float-right" onclick="deleteitem('+i+')">Hapus</a>'+
+              '</div>'+
+            '</div>'
+              hargatotal = hargabarang_keranjang[i]+hargatotal
+              
+
+              
+
+              if(totalbayar>600000){
+                  discount = totalbayar*0.05
+              }else{
+                  discount = 0
+              }
+              totalbayar = hargatotal-discount
+
+              pajak = hargatotal*0.1
+
+              var totalbelanja = totalbayar - pajak
+              tampilanpajak.innerHTML = pajak
+              tampilandiscount.innerHTML = discount
+              tampilantotalbayar.innerHTML = totalbelanja
+            }
+          }
+
+           showlistproduk()
+
+          function deleteitem(id) {
+              namabarang_keranjang.splice(id,1)
+              hargabarang_keranjang.splice(id,1)
+
+          showlistkeranjang()
+
+
+          }
+
+
+
+          </script>
+  
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
